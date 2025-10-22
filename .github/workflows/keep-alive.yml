@@ -1,0 +1,9 @@
+name: Keep Alive
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Chạy mỗi 5 phút
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Keeping alive at $(date)" >> keepalive.log
