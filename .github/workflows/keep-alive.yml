@@ -6,4 +6,14 @@ jobs:
   keep-alive:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Keeping alive at $(date)" >> keepalive.log
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Write to log
+        run: echo "Keeping alive at $(date)" >> keepalive.log
+      - name: Commit and push log
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add keepalive.log
+          git commit -m "Update keepalive.log at $(date)" || echo "No changes to commit"
+          git push
